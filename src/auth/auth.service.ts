@@ -1,9 +1,9 @@
 import { HttpStatus, Injectable } from '@nestjs/common';
 import { HttpException } from '@nestjs/common/exceptions/http.exception';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
+import { Model, Types } from 'mongoose';
 import { validate } from 'class-validator';
-import jwt from 'jsonwebtoken';
+import * as jwt from 'jsonwebtoken';
 import * as argon2 from 'argon2';
 import { CreateUserDto, LoginUserDto } from './user.dto';
 import { User, UserDocument } from './user.schema';
@@ -46,7 +46,11 @@ export class AuthService {
       );
     }
 
-    const user = new this.userModel(dto);
+    const user = new this.userModel({
+      _id: Types.ObjectId(),
+      ...dto,
+    });
+    console.log('user', user);
     const errors = await validate(user);
     if (errors.length > 0) {
       const _errors = { username: 'Userinput is not valid.' };

@@ -9,9 +9,13 @@ import { NotesService } from './notes.service';
 import { MongooseModule } from '@nestjs/mongoose';
 import { NoteSchema } from './note.schema';
 import { AuthenticationMiddleware } from 'src/common/auth.middleware';
+import { AuthModule } from 'src/auth/auth.module';
 
 @Module({
-  imports: [MongooseModule.forFeature([{ name: 'Note', schema: NoteSchema }])],
+  imports: [
+    MongooseModule.forFeature([{ name: 'Note', schema: NoteSchema }]),
+    AuthModule,
+  ],
   controllers: [NotesController],
   providers: [NotesService],
 })

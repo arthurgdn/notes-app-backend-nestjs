@@ -1,5 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
+import { User } from 'src/auth/user.schema';
 
 export type NoteDocument = Note & Document;
 
@@ -12,7 +13,7 @@ export class Note {
   content: string;
 
   @Prop()
-  dateWritten: string;
+  author: string;
 }
 
 export const NoteSchema = SchemaFactory.createForClass(Note);
