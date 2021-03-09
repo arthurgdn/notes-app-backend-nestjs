@@ -10,6 +10,7 @@ import { AuthModule } from './auth/auth.module';
     NotesModule,
     MongooseModule.forRoot('mongodb://localhost/nest', {
       useNewUrlParser: true,
+      useFindAndModify: false,
     }),
     AuthModule,
   ],
